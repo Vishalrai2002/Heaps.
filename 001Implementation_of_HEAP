@@ -76,6 +76,8 @@ class maxHeap {
 		}
 };
 
+// IF YOU WANT TO CREATE A MIN HEAP THAN DO ONLY CHANGE THE SIGN LIKE (SMALLER - GREATER) OR (GREATER - SMALLER);
+
 int main() {
 
 	maxHeap m;

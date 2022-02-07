@@ -1,0 +1,103 @@
+/*
+
+	Implementation of the heap/priority_queue data structure.
+
+*/
+
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+class maxHeap {
+
+	vector<int> v;
+
+	void heapify(int i) {
+
+		int maxIdx = i; // assume value at the ith idx is the maximum
+
+		int leftIdx = 2*i + 1;
+// leftIdx < v.size() to check leftidx is valid index or not		
+		if(leftIdx < v.size() && v[leftIdx] > v[maxIdx]) {
+			maxIdx = leftIdx;
+		}
+
+		int rightIdx = 2*i + 2;
+// rightidx < v.size() to check rightidx is valid index or not		
+		if(rightIdx < v.size() && v[rightIdx] > v[maxIdx]) {
+			maxIdx = rightIdx;
+		}
+
+// After doing above steps now max index is come in maxidx
+
+// Firstly check maxidx is not equal to i if not then do swap and call heapify on maxidx...
+		if(maxIdx != i) { // also works as a base case
+			swap(v[i], v[maxIdx]);
+			heapify(maxIdx);
+		}
+
+	}
+
+	public :
+
+		void push(int data) {
+			v.push_back(data);
+            // after push_back there is possiblity heap property is disturbed so fix it in below code 
+			int childIdx  = v.size() - 1; // because last index is v.size()-1;
+			      // check even or not ? for odd(I/2) : for even(I/2-1)
+			int parentIdx = childIdx%2 ? childIdx/2 : childIdx/2 - 1;
+
+            // parentidx>=0 used as a break point when it is done then stop
+			while(parentIdx >= 0 && v[childIdx] > v[parentIdx]) {
+				swap(v[childIdx], v[parentIdx]);
+				childIdx = parentIdx; // After Swapping our chidlidx become parentidx
+				parentIdx = childIdx%2 ? childIdx/2 : childIdx/2 - 1; // then again check its parentidx
+			}
+
+		}
+
+		void pop() {
+			swap(v[0], v[v.size()-1]); // swaped the root node with the last element 
+			v.pop_back(); // pop_back the last elment
+			heapify(0); // call the heapify function
+		}
+
+		int top() {
+			return v[0]; // because maximum element is at 0th index in max heap
+		}
+
+		bool empty() {
+			return v.empty();
+		}
+
+		int size() {
+			return v.size();
+		}
+};
+
+int main() {
+
+	maxHeap m;
+
+	m.push(7);
+	m.push(5);
+	m.push(4);
+	m.push(6);
+	m.push(8);
+
+	cout << m.size() << endl;
+
+	while(!m.empty()) {
+		cout << m.top() << " ";
+		m.pop();
+	}
+
+	cout << endl;
+
+	cout << m.size() << endl;
+
+	return 0;
+}
+
+

@@ -25,7 +25,7 @@ int main() {
 
     int totalCost = 0;
 
-    while(minHeap.size() > 1) {
+    while(minHeap.size() > 1) { // We do this until minHeap exist or its size is greater than 1
 
 // To find the first minimum
         int x = minHeap.top();

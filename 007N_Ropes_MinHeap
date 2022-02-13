@@ -1,0 +1,45 @@
+/*
+
+    There are given n ropes of different lengths, we need to connect these ropes into one rope. 
+    The cost to connect two ropes is equal to the sum of their lengths. We need to connect the 
+    ropes with minimum cost.
+
+    Example :
+    
+    Input : {4, 3, 2, 6}
+    Output: 29
+
+*/
+
+#include<iostream>
+#include<vector>
+#include<queue>
+
+using namespace std;
+
+int main() {
+
+    vector<int> ropeLengths = {4, 3, 2, 6};
+
+    priority_queue<int, vector<int>, greater<int>> minHeap(ropeLengths.begin(), ropeLengths.end());
+
+    int totalCost = 0;
+
+    while(minHeap.size() > 1) {
+
+// To find the first minimum
+        int x = minHeap.top();
+        minHeap.pop();
+// To find the second minimum
+        int y = minHeap.top();
+        minHeap.pop();
+
+        totalCost += (x+y); // Add first and second minimum in totalcost
+        minHeap.push(x+y); // then push again x+y
+
+    }
+
+    cout << totalCost << endl; // Print the total cost
+
+    return 0;
+}

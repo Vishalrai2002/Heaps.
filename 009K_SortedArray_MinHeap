@@ -66,7 +66,7 @@ int main() {
     }
 
     while(!minHeap.empty()) {
-        // Firstly take out the minimum vector
+        // Firstly extact the minimum element
         vector<int> minVec = minHeap.top();
         minHeap.pop();
 
@@ -77,7 +77,7 @@ int main() {
         out.push_back(minVal); // push back the minimum value in output 
         if(val_idx+1 < inp[arr_idx].size()) {  // Cheked it is valid index or not
             int val = inp[arr_idx][val_idx+1];
-            minHeap.push({val, arr_idx, val_idx+1});
+            minHeap.push({val, arr_idx, val_idx+1}); // Then push the next element in the minHeap
         }
     }
 

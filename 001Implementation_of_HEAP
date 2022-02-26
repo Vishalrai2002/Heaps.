@@ -60,7 +60,7 @@ class maxHeap {
 		void pop() {
 			swap(v[0], v[v.size()-1]); // swaped the root node with the last element 
 			v.pop_back(); // pop_back the last elment
-			heapify(0); // call the heapify function
+			heapify(0); // call the heapify function at 0th INdex or at Root node
 		}
 
 		int top() {
